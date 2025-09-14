@@ -1,10 +1,8 @@
-// next.config.js
 /** @type {import('next').NextConfig} */
-// const nextConfig = {
-  output: 'export', // Важно для GitHub Pages!
+const nextConfig = {
   trailingSlash: true,
   images: {
-    unoptimized: true // Важно для экспорта!
+    unoptimized: true
   }
 }
 
