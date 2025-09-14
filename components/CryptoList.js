@@ -1,4 +1,3 @@
-// components/CryptoList.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -13,11 +12,14 @@ export default function CryptoList() {
     const fetchCryptoData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/crypto');
+        // ЗАМЕНЯЕМ вызов нашего API на прямой вызов CoinGecko
+        const response = await axios.get(
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h'
+        );
         setCryptoData(response.data);
         setError(null);
       } catch (err) {
-        setError(err.response?.data?.error || 'Не удалось загрузить данные');
+        setError('Не удалось загрузить данные. Проверьте подключение к интернету.');
         console.error('Ошибка при загрузке данных:', err);
       } finally {
         setLoading(false);
